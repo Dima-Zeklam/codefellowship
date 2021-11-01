@@ -31,25 +31,25 @@ public class ApplicationUserController {
 
     @GetMapping("/")
     public String getHomePage(Principal principal, Model model){
-        if(principal == null){
-            return "error.html";
+        if(principal != null){
+           model.addAttribute("username", principal.getName());
         }
-        else {
-            model.addAttribute("username", principal.getName());
+
+
             return "index.html";
         }
-    }
+
     @GetMapping("/signup")
     public String getSignUpPage(){
         return "signup";
     }
 
     @PostMapping("/signup")
-    public String signUpUser(@RequestParam String username, @RequestParam String password, @RequestParam String firstName,
+    public RedirectView signUpUser(@RequestParam String username, @RequestParam String password, @RequestParam String firstName,
                              @RequestParam String lastName, @RequestParam String dateOfBirth, @RequestParam String bio){
         ApplicationUser appUser = new ApplicationUser(username, encoder.encode(password),  firstName,  lastName,  dateOfBirth,  bio);
         applicationUserRepository.save(appUser);
-        return "login";
+        return new RedirectView("/profile");
     }
 
     @GetMapping("/login")
