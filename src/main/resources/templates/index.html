@@ -13,21 +13,11 @@
 </head>
 <body>
 <header>
+
     <img src="https://pbs.twimg.com/profile_images/1267608407361507328/0wChuPC3.png" width="100"/>
      <h1 style="color: black">Welcome to Code Fellowship Application </h1>
-
-    <ul class="ulclass">
-        <div class="class2">
-            <li><a th:href="@{/signup}" style="text-decoration: none;font-size: 30px">Signup</a></li>
-        </div>
-        <div class="class2">
-            <li><a th:href="@{/login}" style="text-decoration: none;font-size: 30px">Login</a></li>
-        </div>
-
-
-    </ul>
-
-
+    <h3 th:text="${username}"></h3>
+    <div th:insert="nav :: header"></div>
 
 </header>
 

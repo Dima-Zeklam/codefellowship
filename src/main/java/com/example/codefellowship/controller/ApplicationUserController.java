@@ -1,7 +1,9 @@
 package com.example.codefellowship.controller;
 
 import com.example.codefellowship.models.ApplicationUser;
+import com.example.codefellowship.models.Post;
 import com.example.codefellowship.repository.ApplicationUserRepository;
+import com.example.codefellowship.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
 
@@ -22,11 +25,20 @@ public class ApplicationUserController {
     @Autowired
     ApplicationUserRepository applicationUserRepository;
 
-    @GetMapping("/")
-    public String getHomePage(){
-        return "index";
-    }
+    @Autowired
+    PostRepository postRepository;
 
+
+    @GetMapping("/")
+    public String getHomePage(Principal principal, Model model){
+        if(principal == null){
+            return "error.html";
+        }
+        else {
+            model.addAttribute("username", principal.getName());
+            return "index.html";
+        }
+    }
     @GetMapping("/signup")
     public String getSignUpPage(){
         return "signup";
@@ -78,4 +90,11 @@ public class ApplicationUserController {
         return "profile";
     }
 
+
+    @PostMapping("/profile")
+    public RedirectView postforprofile(Principal p, @RequestParam String body){
+        Post newPost= new Post(body,applicationUserRepository.findByUsername(p.getName()));
+        postRepository.save(newPost);
+        return new RedirectView("/profile");
+    }
     }
