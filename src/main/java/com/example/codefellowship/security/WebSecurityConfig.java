@@ -35,4 +35,5 @@ protected void configure(HttpSecurity http) throws Exception {
             .defaultSuccessUrl("/profile", true).failureUrl("/login").and().logout().logoutUrl("/perform_logout")
             .deleteCookies("JSESSIONID");
 }
+
 }
