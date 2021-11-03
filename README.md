@@ -24,7 +24,7 @@ spring.sql.init.platform=postgres
 spring.datasource.url=jdbc:postgresql://localhost:5432/users
 spring.datasource.username=username
 spring.datasource.password=password
-spring.jpa.hibernate.ddl-auto=create
+spring.jpa.hibernate.ddl-auto=update
 spring.sql.init.mode=always
 ```
 
@@ -60,3 +60,7 @@ users=# SELECT * FROM followed_stream;
 (2 rows)
 
 ```
+### lab 19:
+* Polish the site , Thymeleaf fragment like header and footer for all pages.
+* for style -> Css and bootstrap 
+* 

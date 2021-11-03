@@ -5,8 +5,6 @@ import com.example.codefellowship.models.Post;
 import com.example.codefellowship.repository.ApplicationUserRepository;
 import com.example.codefellowship.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.method.P;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,10 +32,14 @@ public class ApplicationUserController {
 
 
     @GetMapping("/")
-    public String getHomePage(Principal principal, Model model){
+    public String getHomePage(Principal principal, Model model) {
+        model.addAttribute("p", principal);
+        if(principal ==null){
+            return "index";
+        }
         ApplicationUser user = applicationUserRepository.findByUsername(principal.getName());
-           model.addAttribute("username", user.getUsername());
-            return "index.html";
+           model.addAttribute("user", user);
+            return "index";
         }
 
     @GetMapping("/signup")
@@ -58,38 +60,24 @@ public class ApplicationUserController {
         return "login";
     }
 
-    @GetMapping("/logout")
-    public String getLogoutPage(){
-        return "index";
-    }
 
     @GetMapping("/users/{id}")
     public String profile(@PathVariable Integer id, Model model) {
+
         ApplicationUser user = applicationUserRepository.findById(id).get();
         model.addAttribute("user", user);
-        model.addAttribute("id", user.getId());
-        model.addAttribute("username", user.getUsername());
-        model.addAttribute("firstName", user.getFirstName());
-        model.addAttribute("lastName", user.getLastName());
-        model.addAttribute("dateOfBirth", user.getDateOfBirth());
-        model.addAttribute("bio", user.getBio());
-
-        return "profile";
-    }
-
-//    @GetMapping("/profile")
-//    public String myprofile(Model model, Principal principal) {
-//        ApplicationUser user = applicationUserRepository.findByUsername(principal.getName());
-//        model.addAttribute("user", user);
-//        model.addAttribute("username", user.getUsername());
 //        model.addAttribute("id", user.getId());
+//        model.addAttribute("username", user.getUsername());
 //        model.addAttribute("firstName", user.getFirstName());
 //        model.addAttribute("lastName", user.getLastName());
 //        model.addAttribute("dateOfBirth", user.getDateOfBirth());
 //        model.addAttribute("bio", user.getBio());
-//
-//        return "profile";
-//    }
+
+        return "profile";
+    }
+
+
+
 
     @GetMapping("/profile")
     public String myprofile(Model model, Principal principal) {
@@ -111,9 +99,12 @@ public class ApplicationUserController {
         return ("profile.html");
     }
 @GetMapping ("/suggest")
-public String home(Model m, Principal p){
+public String home(Model model, Principal principal){
+    model.addAttribute("p", principal);
+    ApplicationUser user = applicationUserRepository.findByUsername(principal.getName());
+    model.addAttribute("user",user);
     List<ApplicationUser> allUsers= applicationUserRepository.findAll();
-    ApplicationUser currentUser= applicationUserRepository.findByUsername(p.getName());
+    ApplicationUser currentUser= applicationUserRepository.findByUsername(principal.getName());
     List<ApplicationUser> followingList= currentUser.getFollowing();
     List<ApplicationUser> notFollowedUser= new ArrayList<>();
     allUsers.forEach((element)->{
@@ -121,7 +112,7 @@ public String home(Model m, Principal p){
             notFollowedUser.add(element);
         }
     });
-    m.addAttribute("users",notFollowedUser);
+    model.addAttribute("users",notFollowedUser);
     return ("follow.html");
 }
 
@@ -135,8 +126,11 @@ public String home(Model m, Principal p){
         return new RedirectView("/suggest");
     }
     @GetMapping("/feed")
-    public String GetFeed( Principal p, Model model){
-        ApplicationUser currentUser = applicationUserRepository.findByUsername(p.getName());
+    public String GetFeed( Principal principal, Model model){
+        model.addAttribute("p", principal);
+        ApplicationUser user = applicationUserRepository.findByUsername(principal.getName());
+        model.addAttribute("user",user);
+        ApplicationUser currentUser = applicationUserRepository.findByUsername(principal.getName());
         List<ApplicationUser> followList= currentUser.getFollowing();
         model.addAttribute("followings",followList);
         return "feed.html";
