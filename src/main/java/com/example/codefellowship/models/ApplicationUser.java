@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -22,16 +23,6 @@ public class ApplicationUser implements UserDetails {
     private String lastName;
     private String dateOfBirth;
     private String bio;
-    @OneToMany(mappedBy = "appUser")
-    List<Post> post;
-
-    public List<Post> getPost() {
-        return post;
-    }
-
-    public void setPost(List<Post> post) {
-        this.post = post;
-    }
 
     public ApplicationUser() {
     }
@@ -44,6 +35,30 @@ public class ApplicationUser implements UserDetails {
         this.dateOfBirth = dateOfBirth;
         this.bio = bio;
     }
+
+    @OneToMany(mappedBy = "appUser")
+    List<Post> post;
+
+    @ManyToMany
+    @JoinTable(
+            name="followed_stream",
+            joinColumns = {@JoinColumn(name="followers_id ")},
+            inverseJoinColumns = {@JoinColumn(name=" following_id")}
+    )
+    public List<ApplicationUser> following;
+
+    @ManyToMany(mappedBy="following", fetch = FetchType.EAGER)
+    public List<ApplicationUser> follower;
+
+    public List<Post> getPost() {
+        return post;
+    }
+
+    public void setPost(List<Post> post) {
+        this.post = post;
+    }
+
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -113,4 +128,20 @@ public class ApplicationUser implements UserDetails {
     }
 
 
+    public List<ApplicationUser> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(ApplicationUser addfollowing) {
+        this.following.add(addfollowing);
+    }
+
+    public List<ApplicationUser> getFollower() {
+        return follower;
+    }
+
+
+    public void setFollower(List<ApplicationUser> follower) {
+        this.follower = follower;
+    }
 }

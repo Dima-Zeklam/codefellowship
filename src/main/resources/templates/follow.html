@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org" lang="en">
+
+<head >
+    <title>feed page</title>
+
+</head>
+<body>
+<div th:insert="nav :: header"></div>
+
+<main>
+    <span th:if="${users.size() == 0}"><h1>There is no suggested people to follow</h1></span>
+
+    <table id="table" th:if="${users.size()!= 0}" >
+        <tr>
+            <th> userName  </th>
+            <th> Follow  </th>
+        </tr>
+        <tr th:each="user:${users}">
+            <td th:text="${user.username}"> </td>
+            <td ><a th:href="@{'/follow/'+${user.id}}"> Follow</a> </td>
+        </tr>
+    </table>
+
+</main>
+
+</body>
+</html>
