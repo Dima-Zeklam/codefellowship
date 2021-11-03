@@ -6,7 +6,6 @@ import java.util.Date;
 
 @Entity
 public class Post {
-    //@Column(name = "created_at", nullable = false, updatable = false)
     private LocalDate createdAt;
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
@@ -14,6 +13,7 @@ public class Post {
     private String body;
 
    @ManyToOne
+   @JoinColumn(name="Post_appUser")
     private ApplicationUser appUser;
     public Post() {
 

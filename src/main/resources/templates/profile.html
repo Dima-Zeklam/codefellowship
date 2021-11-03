@@ -11,7 +11,14 @@
     <h1>Profile page</h1>
     <h3 th:text="${username}"></h3>
     <div th:insert="nav :: header"></div>
+    <div class="class2">
+        <a th:href="@{/suggest}">Suggest page</a>
 
+    </div>
+    <div class="class2">
+        <a th:href="@{/feed}">Feed page</a>
+
+    </div>
 <!--<div class="class2">-->
 <!--    <a th:href="@{/signup}">Signup</a>-->
 <!--</div>-->
@@ -19,15 +26,15 @@
         <div class="card" style="width: 20rem; margin: auto ; ">
             <img class="card-img-top" src="https://picsum.photos/200/300" alt="profile image" />
                 <div class="card-body">
-               <h5 class="card-title"><span th:text="${firstName} + ' ' + ${lastName}"></span></h5>
+               <h5 class="card-title"><span th:text="${user.firstName} + ' ' + ${user.lastName}"></span></h5>
                 </div>
                 <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID: <span th:text="${id}"></span></li>
-               <li class="list-group-item">Username: <span th:text="${username}"></span></li>
-               <li class="list-group-item">First Name: <span th:text="${firstName}"></span></li>
-                 <li class="list-group-item">Last Name: <span th:text="${lastName}"></span></li>
-                  <li class="list-group-item">Date Of Birth: <span th:text="${dateOfBirth}"></span></li>
-                 <li class="list-group-item">Bio: <span th:text="${bio}"></span></li>
+                <li class="list-group-item">ID: <span th:text="${user.id}"></span></li>
+               <li class="list-group-item">Username: <span th:text="${user.username}"></span></li>
+               <li class="list-group-item">First Name: <span th:text="${user.firstName}"></span></li>
+                 <li class="list-group-item">Last Name: <span th:text="${user.lastName}"></span></li>
+                  <li class="list-group-item">Date Of Birth: <span th:text="${user.dateOfBirth}"></span></li>
+                 <li class="list-group-item">Bio: <span th:text="${user.bio}"></span></li>
                  </ul>
             <form action="/profile" method="post">
                 <label for="body">Post</label>

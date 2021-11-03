@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org" lang="en">
+
+<head >
+   <title>feed page</title>
+
+</head>
+<body>
+<header>
+<div th:insert="nav :: header"></div>
+</header>
+<main>
+    <div id="box">
+
+        <div th:each="following:${followings}"  >
+            <p th:text="${following.username} "></p>
+            <a th:href="@{'/profile/'+${following.id}}"> Profile</a>
+            <p> Posts</p>
+            <div th:each="post:${following.getPost()}"  >
+                <p th:text="${post.body}"></p>
+
+            </div>
+
+        </div>
+    </div>
+
+</main>
+
+</body>
+</html>

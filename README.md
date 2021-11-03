@@ -33,16 +33,30 @@ CREATE DATABASE users
 
 ```
 users=# SELECT * FROM application_user;
+ id |  bio  | date_of_birth | first_name | last_name |                           password                           |
+username
+----+-------+---------------+------------+-----------+--------------------------------------------------------------+---------------
+  1 | Java  | 5-8-1997      | dima       | Zeklam    | $2a$10$JoNlzYm1oJ29DEBm6g1xMO4stqajw0glaC3DCcRCi.bPg86clxDTq | Dima-Zeklam
+  2 | Java  | 5-8-1997      | dima       | Zeklam    | $2a$10$ca7DaZvBvFaq5DE6P59gguCuAuilDCaENbFR0LVyxSgN.x2xSG7Cm | Dima-Zeklam97
+(2 rows)
 
-id |  bio  | date_of_birth | first_name | last_name |                           password                           |  username
-----+-------+---------------+------------+-----------+--------------------------------------------------------------+-------------
-1 | Java  | 5-8-1997      | dima       | Zeklam    | $2a$10$mKYP.e5rznOxNRp2j8R6vu.TJwJQygLRe5LNptz3xdjxKjH3NklEC | Dima-Zeklam
-(1 row)
+```
 
-users=#  SELECT * FROM post;
- id |        body        | created_at | app_user_id
-----+--------------------+------------+-------------
-  1 | i can add a post  | 2021-11-01 |           1
-(1 row)
+### lab 18:
+* users can’t perform SQL injection or HTML injection with their posts by using JPA
+* http://localhost:8080/feed this page have that users posts show up in the logged-in user’s feed, where they can see what all of their followed users have posted recently.
+* http://localhost:8080/suggest -> user can discover other users on the service when they visit this page and Allow users to follow other users.
+* http://localhost:8080/suggest -> On a user profile page that does NOT belong to the currently logged-in user there is “Follow” button, When a user clicks that follow button, the logged-in user is now following the viewed-profile-page user,also Each post have a link to the user profile of the user who wrote the post.
+
+
+#### The database :
+Join Table:
+```
+users=# SELECT * FROM followed_stream;
+ followers_id | following_id
+--------------+--------------
+            2 |            1
+            1 |            2
+(2 rows)
 
 ```
