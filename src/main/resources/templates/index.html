@@ -20,12 +20,21 @@
 <body>
 <header>
 
-<!--    <img src="https://pbs.twimg.com/profile_images/1267608407361507328/0wChuPC3.png" width="100"/>-->
-<!--     <h1 style="color: black">Welcome to Code Fellowship Application </h1>-->
-    <h3 th:text="${username}"></h3>
-    <div th:insert="nav :: header"></div>
+
+    <div th:insert="nav ::  header"></div>
 
 </header>
 
+
+    <p class="paragraph">
+
+        <img src="https://pbs.twimg.com/profile_images/1267608407361507328/0wChuPC3.png" width="100"/> Code Fellows is the Pacific Northwest’s premier technical skills training academy, delivering high-quality live instruction both online and in-person to people from all backgrounds. Learners are guided toward vocational change and life transformation through software development,
+        technical operations, cybersecurity and career training. They guide people from all backgrounds to change their lives through fast-paced, career-focused education. They shape passionate learners with immersive training to meet industry needs and improve diversity.
+        Code Fellows has taught over 1,400 graduates and iterated on their curriculum and format to ensure students receive the most industry-relevant training as effectively and efficiently as possible. </p>
+
+
+<footer style="text-align: center">
+    <span th:insert="nav :: footer"></span>
+</footer>
 </body>
 </html>

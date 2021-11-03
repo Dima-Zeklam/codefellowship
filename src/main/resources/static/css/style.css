@@ -1,5 +1,5 @@
 h1{
-    color:white ;
+    color:black ;
     text-align: center;
 }
 header{
@@ -20,8 +20,8 @@ img{
     margin: 20px;
     text-align: center;
 }
-h2,p,img{
-    color: white;
+h2,img{
+    color: black;
     font-size:medium ;
     font-family: Arial, Helvetica, sans-serif;
     margin: 20px;
@@ -49,7 +49,7 @@ h2,p,img{
     /*left:2%;*/
     font-size: 30px;
     display: inline-block;
-    color:white ;
+
 }
 .class2{
     color:black ;
@@ -62,4 +62,14 @@ h2,p,img{
 /*}*/
 li{
     list-style-type: none;
+}
+.paragraph{
+    text-align: justify;
+    font-size: 20px;
+    margin-left:20%;
+    margin-right: 20%;
+    font-family: Arial, Helvetica, sans-serif;
+    border: black solid 4px;
+    padding: 10px;
+
 }

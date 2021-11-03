@@ -10,8 +10,7 @@
 <body>
 <header>
     <h1>Login</h1>
-
-
+    <div th:insert="nav :: non-login"></div>
 </header>
 <div class="form-align">
     <form action="/perform_login" method="post">
@@ -23,11 +22,10 @@
     </form>
 </div>
 <br>
-<div class="class2">
 
-    <p>create an account:</p>
-    <a th:href="@{/signup}">Signup</a>
-</div>
 <br>
+<footer style="text-align: center">
+    <span th:insert="nav :: footer"></span>
+</footer>
 </body>
 </html>

@@ -8,36 +8,71 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link th:href="@{css/style.css}" rel="stylesheet" >
-    <title>Codefellowship</title>
+    <title>CodeFellowShip</title>
 
 </head>
 <body>
-<header>
-    <img src="https://pbs.twimg.com/profile_images/1267608407361507328/0wChuPC3.png" width="100"/>
-    <h1 style="color: black">Welcome to Code Fellowship Application </h1>
 
-    <ul class="ulclass">
-        <div class="class2">
-            <li><a th:href="@{/signup}" style="text-decoration: none;font-size: 30px">Signup</a></li>
-        </div>
-        <div class="class2">
-            <li><a th:href="@{/login}" style="text-decoration: none;font-size: 30px">Login</a></li>
-        </div>
-        <div class="class2">
-            <li><a th:href="@{/profile}" style="text-decoration: none;font-size: 30px">Profile</a></li>
-        </div>
-        <div class="class2">
-            <li><a th:href="@{/}" style="text-decoration: none;font-size: 30px">Home</a></li>
-        </div>
-        <div class="class2">
-            <li><a th:href="@{/perform_logout}" style="text-decoration: none;font-size: 30px">Logout</a></li>
-        </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="header">
+ <span th:if="${p != null}">   <h3>
+       <p th:text="${user.username}"></p>
+   </h3></span>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-    </ul>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a href="http://localhost:8080" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{http://localhost:8080/profile}" class="nav-link">Your Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="http://localhost:8080/feed">Feed</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="http://localhost:8080/suggest">Suggest</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="http://localhost:8080/signup">Sign-up</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="http://localhost:8080/login">Log-In</a>
+            </li>
 
+        </ul>
+    </div>
+</nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="non-login">
 
-</header>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
+    <div class="collapse navbar-collapse" id="navbarSupportedContent2">
+
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a href="http://localhost:8080" class="nav-link">Home</a>
+            </li>
+                        <li class="nav-item">
+                <a class="nav-link" href="http://localhost:8080/signup">Sign-up</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="http://localhost:8080/login">Log-In</a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="footer">
+
+ <div style="margin-top: 30px;">
+     &copy; Dima Zeklam, All rights reserved
+    </div>
+</nav>
 </body>
 </html>

@@ -36,6 +36,7 @@ protected void configure(HttpSecurity http) throws Exception {
             .defaultSuccessUrl("/profile", true).failureUrl("/error").and().logout().logoutUrl("/perform_logout")
             .deleteCookies("JSESSIONID");
 }
+
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
